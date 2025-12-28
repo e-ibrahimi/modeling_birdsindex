@@ -1,0 +1,348 @@
+---
+title: "Birds code"
+author: "Eliana"
+date: "2022-12-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Load libraries and data
+```{r birds}
+library(feather)
+library(data.table)
+library(mgcv)
+library(car)
+library(ggplot2)
+library(grid)
+library(animation)
+library(readr)
+
+
+birds <- read_csv("C:/Users/user/Desktop/Birds paper/birds.csv", show_col_types = FALSE)
+
+birds$Family <- factor(birds$Family)
+birds$habitat <- factor(birds$habitat)
+birds$species <- factor(birds$species)
+```
+All birds by habitat
+
+```{r pressure, echo=FALSE}
+
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=habitat ), method="REML", data = birds, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+All birds by family
+
+```{r pressure, echo=FALSE, out.width="50%"}
+
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=Family), method="REML", data = birds, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Fringillidae 
+
+```{r pressure, echo=FALSE}
+
+#data
+fringi=birds[Family=="Fringillidae",]
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = fringi, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Accipitridae
+
+```{r pressure, echo=FALSE}
+
+#data
+accip=birds[Family=="Accipitridae",]
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = accip, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Acrididae 
+
+```{r pressure, echo=FALSE}
+
+#data
+acrid=birds[Family=="Acrididae",]
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = acrid, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Alaudidae 
+
+```{r pressure, echo=FALSE}
+
+#data
+alaud=birds[Family=="Alaudidae",]
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = alaud, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Alcedinidae 
+
+```{r pressure, echo=FALSE}
+
+#data
+alced=birds[Family=="Alcedinidae",]
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = alced, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Bombycillidae
+
+```{r pressure, echo=FALSE}
+
+#data
+bomby=birds[Family=="Bombycillidae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = bomby, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Gruidae
+
+```{r pressure, echo=FALSE}
+
+#data
+grui=birds[Family=="Gruidae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = grui, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+Family Laridae
+
+```{r pressure, echo=FALSE}
+
+#data
+Larid=birds[Family=="Laridae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = Larid, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Meropidae
+
+```{r pressure, echo=FALSE}
+
+#data
+merop=birds[Family=="Meropidae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = merop, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+Family Motacillidae
+
+```{r pressure, echo=FALSE}
+
+#data
+#mota=birds[Family=="Motacillidae",] 
+anthus=birds[birds$species=="Anthus campestris",]
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = anthus, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Otididae
+
+```{r pressure, echo=FALSE}
+
+#data
+otid=birds[Family=="Otididae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = otid, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+
+Family Phasianidae
+
+```{r pressure, echo=FALSE}
+
+#data
+phasia=birds[Family=="Phasianidae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = phasia, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Podicipedidae
+
+```{r pressure, echo=FALSE}
+
+#data
+podi=birds[birds$Family=="Podicipedidae",] 
+cristatus=birds[birds$species=="Podiceps cristatus",]
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = podi, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Scolopacidae
+
+```{r pressure, echo=FALSE}
+
+#data
+scolo=birds[birds$Family=="Scolopacidae",] 
+tringat=birds[birds$species=="Tringa totanus",] 
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species), method="REML", data = tringat, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+Family Sylviidae
+
+```{r pressure, echo=FALSE}
+
+#data
+sylvi=birds[Family=="Sylviidae",] 
+
+#GAM
+mod_gam1 = gam(log(Index) ~ s(Year, bs = "cr", by=species ), method="REML", data = sylvi, random=list(code = ~1))
+summary(mod_gam1)
+gam.check(mod_gam1)
+
+plot(mod_gam1)
+plot(ggeffects::ggpredict(mod_gam1), facets = TRUE)
+gratia::draw(mod_gam1)
+
+```
+
+
+
+
